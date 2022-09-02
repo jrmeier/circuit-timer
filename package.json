@@ -20,7 +20,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b main -d build",
+    "deploy": "gh-pages -b build -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://myusername.github.io/my-app"
+  "homepage": "https://jrmeier.github.io/circuit-timer"
 }
