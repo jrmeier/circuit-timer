@@ -1,13 +1,27 @@
+html,
+/* https://www.web3colors.com/2022/01/web3-color-palette-13.html */
 body {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: monaco,Consolas,Lucida Console,monospace; 
+  /* background: rgb(131,58,180); */
+  background-color: black;
+  /* background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); */
+   /* background: hsla(324, 91%, 46%, 1);  */
+  /* background: linear-gradient(90deg, hsla(324, 91%, 46%, 1) 0%, hsla(18, 100%, 49%, 1) 100%); */
+  /* background: -moz-linear-gradient(45deg, hsla(324, 91%, 46%, 1) 0%, hsla(18, 100%, 49%, 1) 100%); */
+  /* background: -webkit-linear-gradient(45deg, hsla(324, 91%, 46%, 1) 0%, hsla(18, 100%, 49%, 1) 100%);  */
+  /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#e20b8c", endColorstr="#f84b00", GradientType=1 ); */
+  
+}
+input:focus {
+  outline: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
 }
