@@ -20,31 +20,9 @@ export function Timer() {
         reset,
       } = useStopwatch({ autoStart: false });
 
-    // const {
-    //     seconds,
-    //     minutes,
-    //     // hours,
-    //     // days,
-    //     isRunning,
-    //     start,
-    //     pause,
-    //     reset,
-    // } = {
-    //     seconds: 15,
-    //     minutes: 2,
-    //     // hours,
-    //     // days,
-    //     isRunning: false,
-    //     start: () => {},
-    //     pause: () => {},
-    //     reset: () => {},
-    // }
-
-
-
       const [rounds, setRounds] = useState<round[]>([]);
-      const [fastestRound, setFastestRound] = useState<round>({round: 0, roundTime: 0, updateTime: 0});
-      const[currentRound, setCurrentRound] = useState<round>({round: 0, roundTime: 0, updateTime: 0});
+      const [fastestRound, setFastestRound] = useState<round>({round: 1, roundTime: 0, updateTime: 0});
+      const[currentRound, setCurrentRound] = useState<round>({round: 1, roundTime: 0, updateTime: 0});
 
     const convertTimeToString = (seconds: number) => {
         // console.log({seconds, minutes});
@@ -57,8 +35,6 @@ export function Timer() {
         const addLeadingZero = (num: number) => num < 10 ? `0${num}` : num;
         return addLeadingZero(minutes) + ":" + addLeadingZero(seconds)
       }
-    //   const fastestRound = [...newRounds].reduce((p, c) => (p.roundTime < c.roundTime) ? p : c);
-
     const handleRound = () => {
         const newRounds = [
             ...rounds, 
@@ -67,7 +43,6 @@ export function Timer() {
             }
         ];
 
-        // if()
         const fastestLap = newRounds.reduce((prev, current) => (prev.roundTime < current.roundTime) ? prev : current);
 
 
@@ -76,29 +51,27 @@ export function Timer() {
         setCurrentRound({round: currentRound.round + 1, roundTime: 0, updateTime: 0});
     }
 
-
     const createRoundItem = (round: round) => `${round.round} - ${convertTimeToString(round.roundTime)}`
-    // const displayRound = (round: round) => `${round.round + 1} - ${convertTimeToString(round.time, 0)}`
 
     const handleReset = () => {
         pause();
         setRounds([]);
-        setFastestRound({round: 0, roundTime: 0, updateTime: 0});
-        setCurrentRound({round: 0, roundTime: 0, updateTime: 0});
+        setFastestRound({round: 1, roundTime: 0, updateTime: 0});
+        setCurrentRound({round: 1, roundTime: 0, updateTime: 0});
         reset(new Date(), false);
     }
 
     useEffect(() => {
-            const totalTime = rounds.reduce((prev, current) => prev + current.roundTime, 0);
-            
-            if(isRunning && new Date().getTime()  > currentRound.updateTime + 500) {
-                // console.log("running");
+        
+        if(isRunning && new Date().getTime()  > currentRound.updateTime + 500) {
+                const totalTime = rounds.reduce((prev, current) => prev + current.roundTime, 0);
                 setCurrentRound({
                     ...currentRound,
                     roundTime: seconds + (minutes * 60) - totalTime,
                     updateTime: new Date().getTime(),
                 })
             }
+
             
 }, [isRunning, seconds, rounds, minutes, currentRound])
   return (
@@ -109,7 +82,7 @@ export function Timer() {
         </div>
         <h3>Total: {convertTimeToString(seconds)}</h3>
         {/* <h1>{currentRound.round} - {convertTimeToString(curr)}</h1> */}
-        <h1>{currentRound.roundTime}</h1>
+        <h1>{convertTimeToString(currentRound.roundTime)}</h1>
 
         <div>
             <button onClick={handleRound} className="controlButton roundButton" disabled={!isRunning}>NEXT ROUND</button>
@@ -118,10 +91,12 @@ export function Timer() {
             Fastest round: round #{fastestRound.round} Time: {convertTimeToString(fastestRound.roundTime)}
         </div>
         <div>
+            <ul>
             {rounds
             .map((round, index) => {
-                return <div key={index}>{createRoundItem(round)}</div>
+                return <li className='roundLi' key={index}>{createRoundItem(round)}</li>
             }).reverse()}
+            </ul>
         </div>
     </div>
   );

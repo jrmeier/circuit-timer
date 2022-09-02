@@ -23,16 +23,28 @@
 .startButton {
     background: #018f01;
     border-color: #018f01;
+    width: 50%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 1.2em;
 }
 
 .pauseButton {
     background: #f0ad4e;
     border-color: #f0ad4e;
+    width: 50%;
 }
 
 .resetButton {
     background: #ff0000;
     border-color: #ff0000;
+    width: 50%;
 }
 
 

@@ -11,7 +11,8 @@
 .App {
   height: 100vh;
   flex: 1;
-
+  display: flex-box;
+  max-height: fit-content;
 }
 
 .App-header {
