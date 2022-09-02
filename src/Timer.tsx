@@ -12,8 +12,8 @@ export function Timer() {
     const {
         seconds,
         minutes,
-        hours,
-        days,
+        // hours,
+        // days,
         isRunning,
         start,
         pause,
