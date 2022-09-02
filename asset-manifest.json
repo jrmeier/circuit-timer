@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/circuit-timer/static/css/main.b7922401.css",
-    "main.js": "/circuit-timer/static/js/main.aa67c72b.js",
+    "main.css": "/circuit-timer/static/css/main.f648fa50.css",
+    "main.js": "/circuit-timer/static/js/main.9b1fdeac.js",
     "static/js/787.bdbebbef.chunk.js": "/circuit-timer/static/js/787.bdbebbef.chunk.js",
     "service-worker.js": "/circuit-timer/service-worker.js",
     "index.html": "/circuit-timer/index.html",
-    "main.b7922401.css.map": "/circuit-timer/static/css/main.b7922401.css.map",
-    "main.aa67c72b.js.map": "/circuit-timer/static/js/main.aa67c72b.js.map",
+    "main.f648fa50.css.map": "/circuit-timer/static/css/main.f648fa50.css.map",
+    "main.9b1fdeac.js.map": "/circuit-timer/static/js/main.9b1fdeac.js.map",
     "787.bdbebbef.chunk.js.map": "/circuit-timer/static/js/787.bdbebbef.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b7922401.css",
-    "static/js/main.aa67c72b.js"
+    "static/css/main.f648fa50.css",
+    "static/js/main.9b1fdeac.js"
   ]
 }
