@@ -2,10 +2,10 @@ import React,  { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook'
 import './Timer.css';
 
-type Lap = {
-    lap: number;
-    time: number;
-    lapTime: number;
+type round = {
+    round: number;
+    roundTime: number;
+    updateTime: number;
 }
 
 export function Timer() {
@@ -20,84 +20,107 @@ export function Timer() {
         reset,
       } = useStopwatch({ autoStart: false });
 
-      const [laps, setLaps] = useState<Lap[]>([]);
-      const [fastestLap, setFastestLap] = useState<Lap>({lap: 0, time: 0, lapTime: 0});
-      const [lapTime, setLapTime] = useState<number>(0);
+    // const {
+    //     seconds,
+    //     minutes,
+    //     // hours,
+    //     // days,
+    //     isRunning,
+    //     start,
+    //     pause,
+    //     reset,
+    // } = {
+    //     seconds: 15,
+    //     minutes: 2,
+    //     // hours,
+    //     // days,
+    //     isRunning: false,
+    //     start: () => {},
+    //     pause: () => {},
+    //     reset: () => {},
+    // }
 
 
-    const convertTimeToString = (seconds: number, minutes: number) => {
+
+      const [rounds, setRounds] = useState<round[]>([]);
+      const [fastestRound, setFastestRound] = useState<round>({round: 0, roundTime: 0, updateTime: 0});
+      const[currentRound, setCurrentRound] = useState<round>({round: 0, roundTime: 0, updateTime: 0});
+
+    const convertTimeToString = (seconds: number) => {
+        // console.log({seconds, minutes});
+        let minutes = 0
+        if(seconds > 60) {
+            minutes = Math.floor(seconds / 60);
+            seconds = seconds - (minutes * 60);
+        }
   
         const addLeadingZero = (num: number) => num < 10 ? `0${num}` : num;
         return addLeadingZero(minutes) + ":" + addLeadingZero(seconds)
       }
+    //   const fastestRound = [...newRounds].reduce((p, c) => (p.roundTime < c.roundTime) ? p : c);
 
-    const handleLap = () => {
-        const newLaps = [
-            ...laps, 
+    const handleRound = () => {
+        const newRounds = [
+            ...rounds, 
             {
-                time: (60 * minutes) + seconds, 
-                lap: laps.length,
-                lapTime: lapTime
+                ...currentRound,
             }
         ];
 
         // if()
-        const fastestLap = newLaps.reduce((prev, current) => (prev.lapTime < current.lapTime) ? prev : current);
+        const fastestLap = newRounds.reduce((prev, current) => (prev.roundTime < current.roundTime) ? prev : current);
 
 
-        setFastestLap(fastestLap);
-        setLaps(newLaps)
+        setFastestRound(fastestLap);
+        setRounds(newRounds);
+        setCurrentRound({round: currentRound.round + 1, roundTime: 0, updateTime: 0});
     }
 
 
-    const createLapItem = (lap: Lap) => {
-        // const lapTime = lap - (laps[index - 1] || 0);
-        
-        return `${lap.lap + 1} - ${convertTimeToString(lap.time, 0)}`
-    
-    }
+    const createRoundItem = (round: round) => `${round.round} - ${convertTimeToString(round.roundTime)}`
+    // const displayRound = (round: round) => `${round.round + 1} - ${convertTimeToString(round.time, 0)}`
 
     const handleReset = () => {
         pause();
-        setLaps([]);
-        setFastestLap({lap: 0, time: 0, lapTime: 0});
-        setLapTime(0);
-        reset();
+        setRounds([]);
+        setFastestRound({round: 0, roundTime: 0, updateTime: 0});
+        setCurrentRound({round: 0, roundTime: 0, updateTime: 0});
+        reset(new Date(), false);
     }
 
-
-    
     useEffect(() => {
-        if (isRunning && seconds) {
-            // update the lap time
-            if(laps.length) {
-                const lapTime = (60 * minutes) + seconds - laps[laps.length - 1].time;
-                setLapTime(lapTime)
-            } else {
-                setLapTime(seconds)
+            const totalTime = rounds.reduce((prev, current) => prev + current.roundTime, 0);
+            
+            if(isRunning && new Date().getTime()  > currentRound.updateTime + 500) {
+                // console.log("running");
+                setCurrentRound({
+                    ...currentRound,
+                    roundTime: seconds + (minutes * 60) - totalTime,
+                    updateTime: new Date().getTime(),
+                })
             }
-        }
-}, [isRunning, seconds, laps, minutes])
-
+            
+}, [isRunning, seconds, rounds, minutes, currentRound])
   return (
     <div className='timer'>
-        Total Time: {convertTimeToString(seconds, minutes)}< br/>
-        Lap Time: {lapTime}< br/>
-
         <div className='buttons'>
-            <button onClick={isRunning ? pause : start}  className="controlButton">{isRunning ? 'Pause' : 'Start'}</button>
-            <button onClick={handleReset} className="controlButton">Reset</button>
+            <button onClick={isRunning ? pause : start}  className={`controlButton ${isRunning ? 'pauseButton' : 'startButton'} `}>{isRunning ? 'Pause' : 'Start'}</button>
+            <button onClick={handleReset} className="controlButton resetButton">Reset</button>
+        </div>
+        <h3>Total: {convertTimeToString(seconds)}</h3>
+        {/* <h1>{currentRound.round} - {convertTimeToString(curr)}</h1> */}
+        <h1>{currentRound.roundTime}</h1>
+
+        <div>
+            <button onClick={handleRound} className="controlButton roundButton" disabled={!isRunning}>NEXT ROUND</button>
         </div>
         <div>
-            <button onClick={handleLap} className="controlButton">LAP</button>
+            Fastest round: round #{fastestRound.round} Time: {convertTimeToString(fastestRound.roundTime)}
         </div>
         <div>
-            Fastest Lap: Lap #{fastestLap.lap + 1} Time: {convertTimeToString(fastestLap.lapTime, 0)}
-        </div>
-        <div>
-            {laps
-            .map((lap, index) => {
-                return <div key={index}>{createLapItem(lap)}</div>
+            {rounds
+            .map((round, index) => {
+                return <div key={index}>{createRoundItem(round)}</div>
             }).reverse()}
         </div>
     </div>
