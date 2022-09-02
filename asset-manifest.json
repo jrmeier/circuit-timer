@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/my-app/static/css/main.b7922401.css",
-    "main.js": "/my-app/static/js/main.de5ce353.js",
-    "static/js/787.bdbebbef.chunk.js": "/my-app/static/js/787.bdbebbef.chunk.js",
-    "service-worker.js": "/my-app/service-worker.js",
-    "index.html": "/my-app/index.html",
-    "main.b7922401.css.map": "/my-app/static/css/main.b7922401.css.map",
-    "main.de5ce353.js.map": "/my-app/static/js/main.de5ce353.js.map",
-    "787.bdbebbef.chunk.js.map": "/my-app/static/js/787.bdbebbef.chunk.js.map"
+    "main.css": "/circuit-timer/static/css/main.f648fa50.css",
+    "main.js": "/circuit-timer/static/js/main.9b1fdeac.js",
+    "static/js/787.bdbebbef.chunk.js": "/circuit-timer/static/js/787.bdbebbef.chunk.js",
+    "service-worker.js": "/circuit-timer/service-worker.js",
+    "index.html": "/circuit-timer/index.html",
+    "main.f648fa50.css.map": "/circuit-timer/static/css/main.f648fa50.css.map",
+    "main.9b1fdeac.js.map": "/circuit-timer/static/js/main.9b1fdeac.js.map",
+    "787.bdbebbef.chunk.js.map": "/circuit-timer/static/js/787.bdbebbef.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b7922401.css",
-    "static/js/main.de5ce353.js"
+    "static/css/main.f648fa50.css",
+    "static/js/main.9b1fdeac.js"
   ]
 }
