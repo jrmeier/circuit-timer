@@ -2,7 +2,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: GitHub Pages deploy
+name: Custom Pages Deploy
 
 on:
   push:
@@ -25,11 +25,6 @@ jobs:
         run: npm i
 
       - name: Build my App
-        run: npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        run: npm run deploy
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: public # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
