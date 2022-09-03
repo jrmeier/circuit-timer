@@ -26,5 +26,3 @@ jobs:
 
       - name: Build my App
         run: npm run deploy
-        with:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
