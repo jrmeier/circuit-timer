@@ -29,8 +29,10 @@ export function Timer() {
         let minutes = 0
         if(seconds > 60) {
             minutes = Math.floor(seconds / 60);
-            seconds = seconds - (minutes * 60);
+            seconds = seconds % 60;
         }
+        // return `${minutes}:${seconds}`;
+        // console.log({minutes, seconds});
   
         const addLeadingZero = (num: number) => num < 10 ? `0${num}` : num;
         return addLeadingZero(minutes) + ":" + addLeadingZero(seconds)
@@ -80,7 +82,7 @@ export function Timer() {
             <button onClick={isRunning ? pause : start}  className={`controlButton ${isRunning ? 'pauseButton' : 'startButton'} `}>{isRunning ? 'Pause' : 'Start'}</button>
             <button onClick={handleReset} className="controlButton resetButton">Reset</button>
         </div>
-        <h3>Total: {convertTimeToString(seconds)}</h3>
+        <h3>Total: {convertTimeToString(seconds + (minutes * 60))}</h3>
         {/* <h1>{currentRound.round} - {convertTimeToString(curr)}</h1> */}
         <h1>{convertTimeToString(currentRound.roundTime)}</h1>
 

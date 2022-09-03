@@ -7,6 +7,8 @@
     font-weight: bold;
     /* border-radius: 5px; */
     cursor: pointer;
+    margin: 0 auto
+    ;
 }
 
 .roundButton {
@@ -45,6 +47,7 @@ ul {
     background: #ff0000;
     border-color: #ff0000;
     width: 50%;
+    margin: 0;
 }
 
 
@@ -60,6 +63,8 @@ ul {
     display: inline-block;
     border-color: #fff  ;
     min-width: 300px;
+    max-width: 800px;
+    width: 100%;
 }
 
 .displayTime {

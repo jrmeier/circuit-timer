@@ -8,7 +8,7 @@ function App() {
     <div className="App">
     <header className="App-header">
       <h1>
-        Circuit Timer
+        Timer
       </h1>
     </header>
     <div className='container'>
