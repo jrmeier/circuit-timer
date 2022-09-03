@@ -12,7 +12,6 @@ function App() {
       </h1>
     </header>
     <div className='container'>
-      {/* <BigTimer /> */}
       <Timer />
     </div>
   </div>
