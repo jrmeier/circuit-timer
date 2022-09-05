@@ -2,6 +2,7 @@
   "name": "circuit-timer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jrmeier.github.io/circuit-timer/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
