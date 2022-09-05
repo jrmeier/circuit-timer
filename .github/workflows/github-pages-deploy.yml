@@ -23,6 +23,13 @@ jobs:
 
       - name: Installing my packages
         run: npm i
+      
+      - name: Set Github Env
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}"
+          git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Deploy
         run: npm run deploy
+
+        
