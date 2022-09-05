@@ -24,10 +24,18 @@ jobs:
       - name: Installing my packages
         run: npm i
       
+      # - name: setup git authentication 
+      #   run: |
+      #     git config --global user.email "<me>@<gmail>.com"
+      #     git config --global user.name "<my_name>"
+      #     git remote set-url origin https://<user>:<token>@github.com/<user>/<repo>
+
       - name: Set Github Env
         run: |
           git config --global user.email "${GITHUB_ACTOR}"
           git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+          git remote set-url origin https://${GITHUB_ACTOR}:${secrets.GITHUB_TOKEN}@github.com/jrmeier/circuit-timer
+        #     git remote set-url origin https://<user>:<token>@github.com/<user>/<repo>
 
       - name: Deploy
         run: npm run deploy
