@@ -46,7 +46,7 @@ export function Timer() {
         ]
 
         const fastestLap = newRounds.reduce((prev, current) => (prev.duration < current.duration) ? prev : current);
-        const slowestLap = newRounds.reduce((prev, current) => (prev.duration > current.duration) ? prev : current);
+        // const slowestLap = newRounds.reduce((prev, current) => (prev.duration > current.duration) ? prev : current);
 
         const colorMap = [
             "#97db00",
