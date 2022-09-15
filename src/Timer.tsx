@@ -29,7 +29,7 @@ export function Timer() {
 
     const convertTimeToString = (seconds: number) => {
         let minutes = 0
-        if(seconds > 60) {
+        if(seconds > 59) {
             minutes = Math.floor(seconds / 60);
             seconds = seconds % 60;
         }
