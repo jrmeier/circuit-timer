@@ -1,19 +1,17 @@
 import React from 'react';
 import './App.css';
 import { Timer } from './Timer';
+import { BottomBar } from './BottomBar';
 
 
 function App() {
+
   return (
     <div className="App">
-    <header className="App-header">
-      <h1>
-        Timer
-      </h1>
-    </header>
-    <div className='container'>
-      <Timer />
-    </div>
+      <div className='container'>
+        <Timer />
+        <BottomBar />
+      </div>
   </div>
   );
 }
