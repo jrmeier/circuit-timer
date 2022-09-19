@@ -1,3 +1,30 @@
+.container {
+  /* padding: 0 2rem; */
+  align-items: center;
+  flex: 1;
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.App {
+  height: 100vh;
+  flex: 1;
+  max-height: fit-content;
+  height: 500px;
+}
+
+.App-header {
+  color: #ffffff;
+  flex: 1;
+  display: inline-flex;
+  justify-content: left;
+  height: 100px;
+  width: 50%;
+}
+
 html,
 /* https://www.web3colors.com/2022/01/web3-color-palette-13.html */
 body {

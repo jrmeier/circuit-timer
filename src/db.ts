@@ -116,3 +116,9 @@ export async function endSession({ sessionId, currentRound, }: { sessionId: numb
     }
     throw new Error("No session found");
 }
+
+export async function getSessions(): Promise<Session[]> {
+    const db = await createDb();
+    const sessions = await db.getAll('sessions');
+    return sessions;
+}
