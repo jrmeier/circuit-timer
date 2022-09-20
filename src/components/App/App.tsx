@@ -19,7 +19,7 @@ function App() {
           <Sessions />
         </Route>
         <Route path='/'>
-          <Redirect to='/circuit-timer' />
+          <Redirect to='/circuit-timer/' />
         </Route>
         <BottomBar />
       </div>
