@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/circuit-timer/static/css/main.267edc0c.css",
-    "main.js": "/circuit-timer/static/js/main.182ec16c.js",
+    "main.js": "/circuit-timer/static/js/main.2964efac.js",
     "service-worker.js": "/circuit-timer/service-worker.js",
     "index.html": "/circuit-timer/index.html",
     "main.267edc0c.css.map": "/circuit-timer/static/css/main.267edc0c.css.map",
-    "main.182ec16c.js.map": "/circuit-timer/static/js/main.182ec16c.js.map"
+    "main.2964efac.js.map": "/circuit-timer/static/js/main.2964efac.js.map"
   },
   "entrypoints": [
     "static/css/main.267edc0c.css",
-    "static/js/main.182ec16c.js"
+    "static/js/main.2964efac.js"
   ]
 }
