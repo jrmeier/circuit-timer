@@ -66,7 +66,6 @@ export async function startSession({ workoutId = 'default' }) {
         rounds: []
     }
     // await db.add('sessions', newSession);
-
     return await saveSession(newSession);
 }
 
