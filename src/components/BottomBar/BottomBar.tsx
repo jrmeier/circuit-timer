@@ -14,7 +14,7 @@ export function BottomBar() {
             </div>
             </Link>
             {/* </Link> */}
-            <Link to={'/circuit-timer'}>
+            <Link to={'/circuit-timer/'}>
                 <div className='bar-item'>
                     Timer
                 </div>
