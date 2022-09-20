@@ -15,7 +15,7 @@ function App() {
         <Route path='/circuit-timer'>
           <Timer />
         </Route>
-        <Route path='/sessions'>
+        <Route path='/circuit-timer/sessions'>
           <Sessions />
         </Route>
         <Route path='/'>
