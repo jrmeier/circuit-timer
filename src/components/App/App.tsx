@@ -7,13 +7,9 @@ import { Sessions } from '../Sessions/Sessions';
 
 import { Redirect, Route } from 'wouter'
 
-import { TimerContextProvider } from '../Timer/TimerContext';
-
-
 function App() {
 
   return (
-    <TimerContextProvider>
     <div className="App">
       <div className='container'>
         <Route path='/'>
@@ -28,7 +24,6 @@ function App() {
         <BottomBar />
       </div>
   </div>
-  </TimerContextProvider>
   );
 }
 

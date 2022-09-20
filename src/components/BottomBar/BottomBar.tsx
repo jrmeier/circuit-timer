@@ -14,11 +14,11 @@ export function BottomBar() {
             </div>
             </Link>
             {/* </Link> */}
-            <div className='bar-item'>
             <Link to={'/'}>
-                Timer
+                <div className='bar-item'>
+                    Timer
+                </div>
             </Link>
-            </div>
         </div>
     )
 

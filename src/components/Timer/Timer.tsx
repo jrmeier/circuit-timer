@@ -1,7 +1,8 @@
-import React,  { useContext, useEffect, useState } from 'react';
+import {  useState } from 'react';
 import './Timer.css';
 
-import { TimerContext, TimerRound, DefaultTimerRound } from '../Timer/TimerContext';
+
+import { useTimer,TimerRound, DefaultTimerRound } from '../Timer/useTimer';
 
 const ROUND_COLOR_MAP = [
     "#00ff1e", // dark green
@@ -26,9 +27,9 @@ export function Timer() {
         startPause,
         endSession,
         rounds
-    } = useContext(TimerContext)
+    } = useTimer({})
     
-      const [fastestRound, setFastestRound] = useState<TimerRound>(DefaultTimerRound);
+      const [fastestRound] = useState<TimerRound>(DefaultTimerRound);
     //   const [sortedRoundsWithColor, setSortedRoundsWithColor] = useState<TimerRound[]>([]);
   
     return (

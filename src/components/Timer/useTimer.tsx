@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { startSession, addRound, endSession as endSessionDb, Round } from '../../db';
 
 export interface TimerContextInterface {
@@ -42,7 +42,7 @@ export const DefaultTimerContextProps: TimerContextInterface = {
 
 export const TimerContext = createContext<TimerContextInterface>(DefaultTimerContextProps)
 
-export const TimerContextProvider = (props: any) => {
+export const useTimer = (props: any) => {
     const [ isRunning, setIsRunning] = useState<boolean>(false)
     const [ duration, setDuration] = useState<number>(0)
     const [ intervalId, setIntervalId] = useState<any>(0)
@@ -110,26 +110,25 @@ export const TimerContextProvider = (props: any) => {
                 const currRoundDuraction = (new Date().getTime() - currentRound.updateTime) + currentRound.duration
                 setCurrentRound({...currentRound, duration: currRoundDuraction, updateTime: new Date().getTime()})
                 setStartTime(new Date().getTime())
+
+                const newRounds = rounds.map(r => {
+                    const rankIndex = [...rounds].sort((a, b) => a.duration - b.duration).findIndex(xr => r.roundNum === xr.roundNum)
+                    return {
+                        ...r,
+                        rank: Math.abs(Math.floor((rankIndex / (rounds.length || 1)) * 10))
+                    }
+                })
+        
+                setRounds(newRounds)
             }
         }, 100);
         setIntervalId(interval)
         
-
-        const newRounds = rounds.map(r => {
-            const rankIndex = [...rounds].sort((a, b) => a.duration - b.duration).findIndex(xr => r.roundNum === xr.roundNum)
-            return {
-                ...r,
-                rank: Math.abs(Math.floor((rankIndex / (rounds.length || 1)) * 10))
-            }
-        })
-
-        setRounds(newRounds)
         
         return () => clearInterval(interval);
-      }, [isRunning,duration, startTime, setStartTime, currentRound, setCurrentRound,]);
+      }, [isRunning,duration, startTime, setStartTime, currentRound, setCurrentRound, rounds, setRounds]);
 
-    return (
-        <TimerContext.Provider value={{
+    return {
             start,
             stop,
             pause,
@@ -141,9 +140,6 @@ export const TimerContextProvider = (props: any) => {
             currentRound,
             endSession,
             rounds
-        }}>
-            {props.children}
-        </TimerContext.Provider>
-    )
+        }
 }
 
