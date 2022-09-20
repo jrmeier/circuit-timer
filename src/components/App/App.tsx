@@ -5,21 +5,21 @@ import { BottomBar } from '../BottomBar/BottomBar';
 import { Sessions } from '../Sessions/Sessions';
 
 
-import { Redirect, Route } from 'wouter'
+import { Route, Redirect } from 'wouter'
 
 function App() {
 
   return (
     <div className="App">
       <div className='container'>
-        <Route path='/'>
-          <Timer />
-        </Route>
         <Route path='/circuit-timer'>
-          <Redirect to='/' />
+          <Timer />
         </Route>
         <Route path='/sessions'>
           <Sessions />
+        </Route>
+        <Route path='/'>
+          <Redirect to='/circuit-timer' />
         </Route>
         <BottomBar />
       </div>

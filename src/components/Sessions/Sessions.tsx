@@ -17,7 +17,7 @@ export function Sessions () {
 
 
     return (
-        <div>
+        <div className='sessions-container'>
             <h1 className='log-title'>Sessions</h1>
             <ul>{
                 sessions.map((session) => {

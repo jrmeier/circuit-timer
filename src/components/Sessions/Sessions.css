@@ -3,5 +3,21 @@
     font-weight: bold;
     margin-bottom: 0.5em;
     color: white;
+    padding: 0.5em;
+    background-color: darkgray;
+}
+.session-item {
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    background-color: lightgray;
+}
+.session-item:nth-child(odd) {
+    background-color: #ecf0f1;
+}
+
+.session-container {
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: darkgrey;
 }
 

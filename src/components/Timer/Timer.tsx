@@ -26,11 +26,24 @@ export function Timer() {
         nextRound,
         startPause,
         endSession,
-        rounds
+        rounds,
+        removeRound
     } = useTimer({})
     
-      const [fastestRound] = useState<TimerRound>(DefaultTimerRound);
+    const [fastestRound] = useState<TimerRound>(DefaultTimerRound);
     //   const [sortedRoundsWithColor, setSortedRoundsWithColor] = useState<TimerRound[]>([]);
+    
+    const createRoundItem = (round: TimerRound) => {
+        return (
+        <li
+            className={`roundLi`}
+            key={round.roundNum}
+            >
+            <span style={{ backgroundColor: ROUND_COLOR_MAP[round.rank] }}>{round.roundNum} - {convertTimeToString(round.duration)}</span>
+            <span onClick={() => removeRound(round.roundNum) }> X</span>
+        </li>
+        )
+    }
   
     return (
             <div className='timer'>
@@ -78,14 +91,3 @@ const convertTimeToString = (ms: number) => {
     }
     return addLeadingZero(minutesInt) + ":" + addLeadingZero(displaySeconds, 2) + ":" + addLeadingZero(ms % 1000, 3)
   }
-
-const createRoundItem = (round: TimerRound) => {
-    return (
-    <li
-        className={`roundLi`}
-        key={round.roundNum}
-        >
-        <span style={{ backgroundColor: ROUND_COLOR_MAP[round.rank] }}>{round.roundNum} - {convertTimeToString(round.duration)}</span>
-    </li>
-    )
-}

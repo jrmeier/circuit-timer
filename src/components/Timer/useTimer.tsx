@@ -12,7 +12,8 @@ export interface TimerContextInterface {
     nextRound: Function,
     currentRound: TimerRound,
     endSession: Function
-    rounds: TimerRound[]
+    rounds: TimerRound[],
+    removeRound: Function
 }
 
 export interface TimerRound extends Round {
@@ -37,7 +38,8 @@ export const DefaultTimerContextProps: TimerContextInterface = {
     nextRound: () => console.log("nextRound"),
     currentRound: DefaultTimerRound,
     endSession: () => console.log("endSession"),
-    rounds: []
+    rounds: [],
+    removeRound: () => console.log("removeRound")
 }
 
 export const TimerContext = createContext<TimerContextInterface>(DefaultTimerContextProps)
@@ -101,6 +103,15 @@ export const useTimer = (props: any) => {
             
             setCurrentRound({...DefaultTimerRound, roundNum: currentRound.roundNum + 1, duration: 0, updateTime: new Date().getTime()});
     }
+
+    const removeRound = (roundIdx: number) => {
+        const newRounds = rounds
+        .filter((_, idx) =>  idx !== roundIdx)
+        .map((r, idx) => ({...r, roundNum: idx + 1}))
+        // redo the round number
+
+        setRounds(newRounds);
+    }
     
     useEffect(() => {
         const interval = setInterval(() => {
@@ -139,7 +150,8 @@ export const useTimer = (props: any) => {
             nextRound,
             currentRound,
             endSession,
-            rounds
+            rounds,
+            removeRound
         }
 }
 
