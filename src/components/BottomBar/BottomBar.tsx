@@ -8,13 +8,13 @@ export function BottomBar() {
 
     return (
         <div className='bottom-bar'>
-            <Link to={'/sessions'}>
+            <Link to={'/circuit-timer/sessions'}>
             <div className='bar-item'>
                 Sessions
             </div>
             </Link>
             {/* </Link> */}
-            <Link to={'/'}>
+            <Link to={'/circuit-timer'}>
                 <div className='bar-item'>
                     Timer
                 </div>
