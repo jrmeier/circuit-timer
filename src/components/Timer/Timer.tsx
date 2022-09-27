@@ -1,8 +1,8 @@
-import {  useState } from 'react';
+import {  useContext, useEffect, useState } from 'react';
 import './Timer.css';
 
-
-import { useTimer,TimerRound, DefaultTimerRound } from '../Timer/useTimer';
+import { TimerContext, } from './TimerContext';
+import { TimerRound } from './TimerRoundTypes';
 
 const ROUND_COLOR_MAP = [
     "#00ff1e", // dark green
@@ -28,9 +28,11 @@ export function Timer() {
         endSession,
         rounds,
         removeRound
-    } = useTimer({})
+    } = useContext(TimerContext)
     
-    const [fastestRound] = useState<TimerRound>(DefaultTimerRound);
+    const [fastestRound, setFastestRound] = useState<TimerRound>({...currentRound, duration: 0});
+
+
     //   const [sortedRoundsWithColor, setSortedRoundsWithColor] = useState<TimerRound[]>([]);
     
     const createRoundItem = (round: TimerRound) => {
@@ -44,6 +46,13 @@ export function Timer() {
         </li>
         )
     }
+
+    useEffect(() => {
+        if (rounds.length > 0) {
+            const fastestRound = rounds.reduce((prev, current) => (prev.duration < current.duration) ? prev : current)
+            setFastestRound(fastestRound)
+        }
+    }, [rounds, setFastestRound])
   
     return (
             <div className='timer'>

@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
-import { startSession, addRound, endSession as endSessionDb, Round } from '../../db';
+import { startSession, addRound, endSession as endSessionDb  } from '../../db';
+
+import { TimerRound, DefaultTimerRound } from './TimerRoundTypes';
 
 export interface TimerContextInterface {
     start: Function,
@@ -16,16 +18,6 @@ export interface TimerContextInterface {
     removeRound: Function
 }
 
-export interface TimerRound extends Round {
-    updateTime: number
-    rank: number
-}
-export const DefaultTimerRound: TimerRound = {
-    roundNum: 1,
-    duration: 0,
-    updateTime: 0,
-    rank: 0
-}
 
 export const DefaultTimerContextProps: TimerContextInterface = {
     duration: 0,
@@ -44,7 +36,7 @@ export const DefaultTimerContextProps: TimerContextInterface = {
 
 export const TimerContext = createContext<TimerContextInterface>(DefaultTimerContextProps)
 
-export const useTimer = (props: any) => {
+export const useTimer = () => {
     const [ isRunning, setIsRunning] = useState<boolean>(false)
     const [ duration, setDuration] = useState<number>(0)
     const [ intervalId, setIntervalId] = useState<any>(0)

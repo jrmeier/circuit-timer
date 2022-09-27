@@ -3,13 +3,14 @@ import './App.css';
 import { Timer } from '../Timer/Timer';
 import { BottomBar } from '../BottomBar/BottomBar';
 import { Sessions } from '../Sessions/Sessions';
-
+import { TimerContextProvider } from '../Timer/TimerContext';
 
 import { Route, Redirect } from 'wouter'
 
 function App() {
 
   return (
+    <TimerContextProvider>
     <div className="App">
       <div className='container'>
         <Route path='/circuit-timer'>
@@ -24,6 +25,7 @@ function App() {
         <BottomBar />
       </div>
   </div>
+  </TimerContextProvider>
   );
 }
 
