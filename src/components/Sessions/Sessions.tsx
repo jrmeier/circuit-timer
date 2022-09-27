@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getSessions, Session } from '../../db'
+import { formatMSToDisplay } from '../../formatSecondsToString'
 import './Sessions.css'
-
-
 
 export function Sessions () {
     const [ sessions, setSessions ] = useState([] as Session[])
@@ -15,7 +14,6 @@ export function Sessions () {
         })
     })
 
-
     return (
         <div className='sessions-container'>
             <h1 className='log-title'>Sessions</h1>
@@ -25,7 +23,7 @@ export function Sessions () {
                         <li key={session.sessionId}
                             className='session-item'
                          >
-                            {new Date(session.startTime).toLocaleString()} - {session.duration}
+                            {new Date(session.startTime).toLocaleString()} - {formatMSToDisplay(session.duration)}
                         </li>
                     )
                 })

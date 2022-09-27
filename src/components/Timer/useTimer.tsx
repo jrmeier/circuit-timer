@@ -96,12 +96,18 @@ export const useTimer = () => {
             setCurrentRound({...DefaultTimerRound, roundNum: currentRound.roundNum + 1, duration: 0, updateTime: new Date().getTime()});
     }
 
-    const removeRound = (roundIdx: number) => {
+    const removeRound = (roundNum: number) => {
         const newRounds = rounds
-        .filter((_, idx) =>  idx !== roundIdx)
-        .map((r, idx) => ({...r, roundNum: idx + 1}))
+        .filter((r) => r.roundNum !== roundNum)
+        .sort((a, b) => a.roundNum - b.roundNum)
+        .map((r, i) => ({...r, roundNum: i + 1}))
         // redo the round number
 
+        const newDuration = newRounds.reduce((acc, r) => acc + r.duration, 0)
+        setDuration(newDuration)
+        const latestRoundNum = newRounds[newRounds.length - 1].roundNum
+
+        setCurrentRound({ ...currentRound, roundNum: (latestRoundNum || 0) + 1})
         setRounds(newRounds);
     }
     

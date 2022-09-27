@@ -54,7 +54,6 @@ export async function saveSession(session: Session): Promise<Session> {
 
 export async function startSession({ workoutId = 'default' }) {
     const sessionId = new Date().getTime()
-    console.log("starting session", sessionId);
 
     const newSession: Session = {
         sessionId: sessionId,
@@ -75,15 +74,12 @@ export async function addRound({ sessionId, round}: { sessionId: number, round: 
     const session = await db.get('sessions', sessionId);
 
     if (session) {
-        console.log("adding round", round);
         const newRound = {
             roundNum: round.roundNum,
             duration: round.duration
         }
         session.rounds.push(newRound);
         await saveSession(session);
-    } else {
-        console.log("no session found");
     }
 }
 
