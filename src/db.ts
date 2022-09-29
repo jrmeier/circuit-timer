@@ -108,12 +108,25 @@ export async function endSession({ sessionId, currentRound, }: { sessionId: numb
         session.duration = session.rounds.reduce((acc, round) => acc + round.duration, 0);
 
         saveSession(session);
+    } else {
+        throw new Error("No session found");
     }
-    throw new Error("No session found");
+    return session
 }
 
 export async function getSessions(): Promise<Session[]> {
     const db = await createDb();
     const sessions = await db.getAll('sessions');
     return sessions;
+}
+
+export async function getSession(sessionId: number): Promise<Session> {
+    const db = await createDb();
+
+    const session = await db.get('sessions', sessionId);
+    if(session){
+        return session;
+    }
+
+    throw new Error("No session found");
 }

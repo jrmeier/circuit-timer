@@ -23,7 +23,8 @@ export const TimerContextProvider = (props: any) => {
         currentRound,
         endSession,
         rounds,
-        removeRound
+        removeRound,
+        avgRoundTime
     } = useTimer()
 
     return (<TimerContext.Provider value={{
@@ -38,7 +39,8 @@ export const TimerContextProvider = (props: any) => {
         currentRound,
         endSession,
         rounds,
-        removeRound
+        removeRound,
+        avgRoundTime
     }}>
         {props.children}
     </TimerContext.Provider>

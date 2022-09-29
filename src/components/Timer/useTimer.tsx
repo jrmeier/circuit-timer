@@ -15,7 +15,8 @@ export interface TimerContextInterface {
     currentRound: TimerRound,
     endSession: Function
     rounds: TimerRound[],
-    removeRound: Function
+    removeRound: Function,
+    avgRoundTime: number
 }
 
 
@@ -31,7 +32,8 @@ export const DefaultTimerContextProps: TimerContextInterface = {
     currentRound: DefaultTimerRound,
     endSession: () => console.log("endSession"),
     rounds: [],
-    removeRound: () => console.log("removeRound")
+    removeRound: () => console.log("removeRound"),
+    avgRoundTime: 0
 }
 
 export const TimerContext = createContext<TimerContextInterface>(DefaultTimerContextProps)
@@ -44,7 +46,7 @@ export const useTimer = () => {
     const [ rounds, setRounds ] = useState<TimerRound[]>([]);
     const [ sessionId, setSessionId ] = useState<number>(0);
     const [ currentRound, setCurrentRound ] = useState<TimerRound>(DefaultTimerRound);
-
+    const [ avgRoundTime, setAvgRoundTime ] = useState<number>(0);
     
     const start = () => {
         setIsRunning(true)
@@ -110,6 +112,15 @@ export const useTimer = () => {
         setCurrentRound({ ...currentRound, roundNum: (latestRoundNum || 0) + 1})
         setRounds(newRounds);
     }
+
+    const rankRounds = (rounds: TimerRound[]) => rounds.map(r => {
+            const rankIndex = [...rounds].sort((a, b) => a.duration - b.duration).findIndex(xr => r.roundNum === xr.roundNum)
+            return {
+                ...r,
+                rank: Math.abs(Math.floor((rankIndex / (rounds.length || 1)) * 10))
+            }
+        })
+    const calcAvgRound = (rounds: TimerRound[]) => rounds.reduce((acc, r) => acc + r.duration, 0) / (rounds.length || 1)
     
     useEffect(() => {
         const interval = setInterval(() => {
@@ -117,17 +128,19 @@ export const useTimer = () => {
                 const newDuration = new Date().getTime() - startTime + duration
                 setDuration(newDuration)
                 const currRoundDuraction = (new Date().getTime() - currentRound.updateTime) + currentRound.duration
-                setCurrentRound({...currentRound, duration: currRoundDuraction, updateTime: new Date().getTime()})
+                const newCurrentRound = {...currentRound, duration: currRoundDuraction, updateTime: new Date().getTime()}
                 setStartTime(new Date().getTime())
+                
+                const newRounds = rankRounds(rounds)
 
-                const newRounds = rounds.map(r => {
-                    const rankIndex = [...rounds].sort((a, b) => a.duration - b.duration).findIndex(xr => r.roundNum === xr.roundNum)
-                    return {
-                        ...r,
-                        rank: Math.abs(Math.floor((rankIndex / (rounds.length || 1)) * 10))
-                    }
-                })
-        
+                const newCurrentRoundWithRank = rankRounds([
+                    ...newRounds,
+                    {...newCurrentRound}
+                ])
+                .filter(r => r.roundNum === newCurrentRound.roundNum).pop() || newCurrentRound
+                
+                setAvgRoundTime(calcAvgRound(newRounds))
+                setCurrentRound(newCurrentRoundWithRank)
                 setRounds(newRounds)
             }
         }, 100);
@@ -149,7 +162,8 @@ export const useTimer = () => {
             currentRound,
             endSession,
             rounds,
-            removeRound
+            removeRound,
+            avgRoundTime
         }
 }
 

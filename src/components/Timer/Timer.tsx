@@ -28,7 +28,8 @@ export function Timer() {
         startPause,
         endSession,
         rounds,
-        removeRound
+        removeRound,
+        avgRoundTime
     } = useContext(TimerContext)
     
     const [fastestRound, setFastestRound] = useState<TimerRound>({...currentRound, duration: 0});
@@ -68,6 +69,9 @@ export function Timer() {
                 </div>
                 <div>
                     Fastest round: {fastestRound.roundNum} {formatMSToDisplay(fastestRound.duration)}
+                </div>
+                <div>
+                    Avg round time: {formatMSToDisplay(avgRoundTime)}
                 </div>
                 <div>
                     <ul>

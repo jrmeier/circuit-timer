@@ -3,7 +3,7 @@ export function formatMSToDisplay (ms: number) {
     let minutesInt = Math.floor(secondsInt / 60);
     const displaySeconds = secondsInt % 60;
 
-    const addLeadingZero = (num: number, fixed=0) => num < 10 ? `0${num}` : num
+    const addLeadingZero = (num: number, fixed=0) => num < 10 ? `0${num}` : `${num.toFixed(0)}`
 
-    return addLeadingZero(minutesInt) + ":" + addLeadingZero(displaySeconds, 2) + ":" + addLeadingZero(ms % 1000, 3)
+    return addLeadingZero(minutesInt) + ":" + addLeadingZero(displaySeconds, 2) + ":" + (addLeadingZero(ms % 1000, 3))
 }
