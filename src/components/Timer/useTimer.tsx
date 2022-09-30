@@ -83,8 +83,8 @@ export const useTimer = () => {
 
     const endSession = async () => {
         pause();
-        console.log({sessionId, rounds})
         await endSessionDb({sessionId, currentRound});
+        reset();
     }
     const nextRound = async () => {
             const newDuration = (new Date().getTime() - (currentRound.updateTime || startTime)) + currentRound.duration

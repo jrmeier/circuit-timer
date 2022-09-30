@@ -9,3 +9,11 @@
     padding: 0.5em;
     background-color: lightgray;
 }
+
+.rounds-li {
+    font-size: 14px;
+    background-color: lightgray;
+}
+.rounds-li:nth-child(even) {
+    background-color: darkgray;
+}

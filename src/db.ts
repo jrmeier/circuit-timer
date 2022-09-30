@@ -78,7 +78,12 @@ export async function addRound({ sessionId, round}: { sessionId: number, round: 
             roundNum: round.roundNum,
             duration: round.duration
         }
-        session.rounds.push(newRound);
+        // make sure it doesn't already exist
+        if(session.rounds.find(r => r.roundNum === round.roundNum)) {
+            session.rounds = session.rounds.map(r => (r.roundNum === round.roundNum) ? newRound : r)
+        } else { // update it
+            session.rounds.push(newRound);
+            }
         await saveSession(session);
     }
 }

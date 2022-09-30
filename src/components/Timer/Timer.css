@@ -76,10 +76,9 @@ ul {
 }
 
 .displayTime {
-    font-size: 2em;
+    font-size: 3em;
     font-weight: bold;
     text-align: center;
     display: inline-block;
     border-color: #fff  ;
 }
-

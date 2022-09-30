@@ -3,7 +3,7 @@ import './Timer.css';
 
 import { TimerContext, } from './TimerContext';
 import { TimerRound } from './TimerRoundTypes';
-import { formatMSToDisplay } from '../../formatSecondsToString';
+import { formatMSToDisplay } from '../../formatMSToDisplay';
 
 const ROUND_COLOR_MAP = [
     "#00ff1e", // dark green
@@ -58,11 +58,11 @@ export function Timer() {
             <div className='timer'>
                 <div className='buttons'>
                     <button onClick={() => startPause()}  className={`controlButton ${isRunning ? 'pauseButton' : 'startButton'} `}>{isRunning ? 'Pause' : 'Start'}</button>
-                    <button onClick={() => endSession()} className="controlButton endButton">End</button>
+                    <button onClick={() => endSession()} className="controlButton endButton" disabled={!currentRound.duration}>End</button>
                     <button onClick={() => reset()} className="controlButton resetButton">Reset</button>
                 </div>
-                <h3>Total: {formatMSToDisplay(duration)}</h3>
-                <h1>{currentRound.roundNum} - {formatMSToDisplay(currentRound.duration)}</h1>
+                <h1>{formatMSToDisplay(duration)}</h1>
+                <h1 className="displayTime">{currentRound.roundNum} - {formatMSToDisplay(currentRound.duration)}</h1>
 
                 <div>
                     <button onClick={() =>nextRound()} className="controlButton roundButton" disabled={!isRunning}>NEXT ROUND</button>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { getSessions, Session } from '../../db'
-import { formatMSToDisplay } from '../../formatSecondsToString'
+import { formatMSToDisplay } from '../../formatMSToDisplay'
 import './Sessions.css'
 import { Link } from 'wouter'
+
 
 export function Sessions () {
     const [ sessions, setSessions ] = useState([] as Session[])
@@ -10,7 +11,7 @@ export function Sessions () {
     useEffect(() => {
         
         getSessions().then((sessions) => {
-            const sortedSessions = sessions.sort((a, b) => a.sessionId - b.sessionId)
+            const sortedSessions = sessions.sort((a, b) => b.sessionId - a.sessionId)
             setSessions(sortedSessions)
         })
     })
