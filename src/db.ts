@@ -1,20 +1,8 @@
 import { openDB, DBSchema } from 'idb';
 
-export interface Session{
-    sessionId: number;
-    startTime: Date;
-    endTime?: Date;
-    duration: number;
-    notes: string;
-    workoutId: string;
-    inProgress: boolean;
-    rounds: Round[];
-}
+import { Round } from './components/Workouts/WorkoutTypes';
+import { Session } from './components/Sessions/SessionsTypes';
 
-export interface Round {
-    roundNum: number;
-    duration: number;
-}
 
 interface MyDB extends DBSchema {
     sessions:   { 

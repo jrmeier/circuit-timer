@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getSession, Session, Round } from '../../db'
+import { getSession } from '../../db'
 import './ActiveSession.css'
 import { formatMSToDisplay } from '../../formatMSToDisplay'
+import { Round } from '../Workouts/WorkoutTypes'
+import { Session } from './SessionsTypes'
 
 export function createRoundLi (round: Round) {
   return (
@@ -28,7 +30,7 @@ export function ActiveSession({ sessionId }: { sessionId: number }) {
         }
 
         if(session?.rounds){
-            const avgRoundTime = session.rounds.reduce((acc, round) => acc + round.duration, 0) / session.rounds.length
+            const avgRoundTime = (session.rounds.reduce((acc: number, round: Round) => acc + round.duration, 0) / session.rounds.length)
             setAvgRoundTime(avgRoundTime)
         }
     }, [sessionId, session])
@@ -45,7 +47,7 @@ export function ActiveSession({ sessionId }: { sessionId: number }) {
                 <li className='active-session-li'>Avg Round: {formatMSToDisplay(avgRoundTime)}</li>
                 <li className='active-session-li'>Rounds: {session.rounds.length}</li>
                 <ul>{
-                    session.rounds.map(round => createRoundLi(round))
+                    session.rounds.map((round: Round) => createRoundLi(round))
                 }
                 </ul>
 

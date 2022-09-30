@@ -19,6 +19,11 @@ export function BottomBar() {
                     Timer
                 </div>
             </Link>
+            <Link to={'/circuit-timer/workouts'}>
+                <div className='bar-item'>
+                    Workouts
+                </div>
+            </Link>
         </div>
     )
 
